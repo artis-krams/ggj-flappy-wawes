@@ -2,21 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyCollision : MonoBehaviour {
+public class DestroyCollision : MonoBehaviour
+{
+    private ParticleSystem particles;
 
-	void OnCollisionEnter(Collision collision) 
-	{
-		//print (collision);
+    // Use this for initialization
+    void Start()
+    {
+        particles = this.gameObject.GetComponent<GameObject>().GetComponentInChildren<ParticleSystem>();
+    }
 
-		if (collision.collider.name=="Player"){
-			print("Collision");
-			Destroy (gameObject);
-		};
-		if (collision.collider.name=="Destroyer"){
-			print("Collision");
-			Destroy (gameObject);
-		};
-
-	}
-
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        gameObject.transform.Rotate(Vector3.up * Time.deltaTime, 1);
+    }
+    void OnCollisionEnter(Collision col)
+    {
+        print(particles);
+        if (col.gameObject.name == "Player")
+        {
+            particles.Play();
+            Destroy(gameObject, 2);
+        }
+    }
 }
