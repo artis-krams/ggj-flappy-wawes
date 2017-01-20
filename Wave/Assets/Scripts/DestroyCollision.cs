@@ -7,7 +7,7 @@ public class DestroyCollision : MonoBehaviour {
 	void OnCollisionEnter(Collision collision) 
 	{
 		print (collision);
-		//if (collision.collider.tag=="Player")
+
 		if (collision.collider.name=="Player"){
 			print("Collision");
 			Destroy (gameObject);
