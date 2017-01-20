@@ -70,7 +70,7 @@ public class WaveTest : MonoBehaviour {
 		if (spaceDown == 0) {
 			print ("space not pressed");
 			if (currentwavestrenght > 0) {
-				currentwavestrenght = currentwavestrenght - waveincrease;
+				currentwavestrenght = currentwavestrenght - (2* waveincrease);
 			} else {
 				currentwavestrenght = 0;
 			}
