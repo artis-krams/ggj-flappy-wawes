@@ -46,9 +46,10 @@ public class WaveTest : MonoBehaviour {
 //		player.transform.Translate (new Vector3 (speed, 0, 0));
 		player.transform.position = pos + axis * Mathf.Sin (Time.time * frequency) * currentwavestrenght;
 		spawner.transform.position = new Vector3 (player.transform.position.x + 10, spawner.transform.position.y, 0);
+		destroyer.transform.position = new Vector3 (player.transform.position.x - 10, destroyer.transform.position.y, 0);
 		if (Time.time > nextActionTime ) {
 			nextActionTime += period;
-			Instantiate (pickup1, new Vector3 (spawner.transform.position.x, Random.Range(10.0f,-10.0f), 0), Quaternion.identity);
+			Instantiate (pickup1, new Vector3 (spawner.transform.position.x, Random.Range(8.0f,-8.0f), 0), Quaternion.identity);
 		}
 //		player.transform.position = Vector3.MoveTowards(transform.position, new Vector3 (transform.position.x+1,currentwavestrenght,0), 10);
 		if (Input.GetKeyDown("space")==true) //risky iet uz hang

@@ -12,6 +12,11 @@ public class DestroyCollision : MonoBehaviour {
 			print("Collision");
 			Destroy (gameObject);
 		};
+		if (collision.collider.name=="Destroyer"){
+			print("Collision");
+			Destroy (gameObject);
+		};
+
 	}
 
 }
