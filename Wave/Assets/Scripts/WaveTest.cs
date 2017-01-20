@@ -19,6 +19,7 @@ public class WaveTest : MonoBehaviour {
 	public GameObject camera;
 	public GameObject spawner;
 	public GameObject destroyer;
+	private int spaceDown = 0;
 	// Use this for initialization
 	void Start () {
 
@@ -46,8 +47,25 @@ public class WaveTest : MonoBehaviour {
 		if (Input.GetKeyDown("space")==true) //risky iet uz hang
 
 		{
+			spaceDown = 1;
+		}
+
+		if (Input.GetKeyUp ("space") == true) {
+			spaceDown = 0;
+		}
+
+		if (spaceDown == 1) {
 			print ("space pressed");
 			currentwavestrenght = currentwavestrenght + waveincrease;
+		}
+
+		if (spaceDown == 0) {
+			print ("space not pressed");
+			if (currentwavestrenght > 0) {
+				currentwavestrenght = currentwavestrenght - waveincrease;
+			} else {
+				currentwavestrenght = 0;
+			}
 		}
 
 	}
