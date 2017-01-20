@@ -21,6 +21,9 @@ public class WaveTest : MonoBehaviour {
 	public GameObject camera;
 	public GameObject spawner;
 	public GameObject destroyer;
+	public GameObject wall1;
+	public GameObject wall2;
+
 	private float nextActionTime = 0.0f;
 	private int spaceDown = 0;
 	private Vector3 axis;
@@ -47,9 +50,25 @@ public class WaveTest : MonoBehaviour {
 		player.transform.position = pos + axis * Mathf.Sin (Time.time * frequency) * currentwavestrenght;
 		spawner.transform.position = new Vector3 (player.transform.position.x + 10, spawner.transform.position.y, 0);
 		destroyer.transform.position = new Vector3 (player.transform.position.x - 10, destroyer.transform.position.y, 0);
+		wall1.transform.position = new Vector3 (player.transform.position.x, wall1.transform.position.y, 0);
+		wall2.transform.position = new Vector3 (player.transform.position.x, wall2.transform.position.y, 0);
+
 		if (Time.time > nextActionTime ) {
 			nextActionTime += period;
-			Instantiate (pickup1, new Vector3 (spawner.transform.position.x, Random.Range(8.0f,-8.0f), 0), Quaternion.identity);
+
+			int sw = Random.Range (0, 3);
+			switch (sw) {
+			case 0:
+				Instantiate (pickup1, new Vector3 (spawner.transform.position.x, Random.Range (8.0f, -8.0f), 0), Quaternion.identity);
+				break;
+			case 1:
+				Instantiate (pickup2, new Vector3 (spawner.transform.position.x, Random.Range (8.0f, -8.0f), 0), Quaternion.identity);
+				break;
+			case 2:
+				Instantiate (pickup3, new Vector3 (spawner.transform.position.x, Random.Range (8.0f, -8.0f), 0), Quaternion.identity);
+				break;
+			}
+
 		}
 //		player.transform.position = Vector3.MoveTowards(transform.position, new Vector3 (transform.position.x+1,currentwavestrenght,0), 10);
 		if (Input.GetKeyDown("space")==true) //risky iet uz hang
