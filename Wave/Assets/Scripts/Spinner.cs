@@ -20,7 +20,7 @@ public class Spinner : MonoBehaviour {
         if (col.gameObject.name == "Player")
         {
             particles.Play();
-            Destroy(gameObject, 5);
+            Destroy(gameObject, 2);
         }
     }
 }
