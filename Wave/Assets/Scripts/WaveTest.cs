@@ -1,7 +1,8 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class WaveTest : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class WaveTest : MonoBehaviour
     public GameObject destroyer;
     public GameObject wall1;
     public GameObject wall2;
+	public bool allowStart;
 
     private float nextActionTime = 0.0f;
 	private float nextSpeedIncreaseTime = 0.0f;
@@ -42,7 +44,7 @@ public class WaveTest : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+		allowStart = false;
         pos = player.transform.position;
         axis = player.transform.up;
 		destroyer.transform.position = new Vector3 (pos.x - dostroyerStartOffset, destroyer.transform.position.y, 0);
@@ -55,8 +57,24 @@ public class WaveTest : MonoBehaviour
     }
 
     void FixedUpdate()
-    {
-		if (!gameOver) {
+	{  	
+	
+		if (Input.GetKey ("space")==true & allowStart==false) {
+			print ("First start");
+			FirstStart ();
+		}
+
+		if (gameOver & allowStart) {
+			if (Input.GetKey ("space")==true) {
+				print ("restart");
+				RestartGame ();
+			}
+
+
+
+		}
+
+		if (!gameOver & allowStart) {
 			camera.transform.position = new Vector3 (player.transform.position.x + 2, 0, -10);
 
 			pos += player.transform.right * Time.deltaTime * speed;
@@ -94,6 +112,8 @@ public class WaveTest : MonoBehaviour
 				AudioSource.PlayClipAtPoint (speedUpSound, player.transform.position);
 			}
 
+
+
 			if (Input.GetKey ("space") == true) {
 				currentwavestrenght = currentwavestrenght + waveincrease;
 			} else {
@@ -112,4 +132,26 @@ public class WaveTest : MonoBehaviour
 		speed -= speedDecrease;
 		AudioSource.PlayClipAtPoint (slowDownSound, player.transform.position);
 	}
+
+
+	public void FirstStart() {
+		allowStart = true;
+	}
+
+
+
+	public void RestartGame() {
+		SceneManager.LoadScene (0);
+
+	}
+
+	public void GameOver() {
+		allowStart = false;
+
+	} 
+
+	public void QuitGame() {
+		Application.Quit ();
+	}
+
 }
