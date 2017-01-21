@@ -9,9 +9,15 @@ public class DestroyCollision : MonoBehaviour
     public AudioClip[] sounds;
     public float minRotation = 0.1f;
     public float maxRotation = 1;
+	private WaveTest manager;
+	private GameObject obj;
 
     void Start()
     {
+		obj = GameObject.FindGameObjectWithTag ("Manager");
+		//print (obj);
+		manager = obj.GetComponent<WaveTest> ();
+		//print (manager);
         particles = gameObject.GetComponentInChildren<ParticleSystem>();
     }
 
@@ -33,6 +39,12 @@ public class DestroyCollision : MonoBehaviour
     {
         if (col.collider.name == "Player")
         {
+			print (manager.speed);
+			print (manager.score);
+
+			manager.score += Mathf.Round(manager.speed*2);
+
+
             particles.Play();
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             startedPlay = true;

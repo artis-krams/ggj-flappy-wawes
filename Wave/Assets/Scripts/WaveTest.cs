@@ -35,6 +35,7 @@ public class WaveTest : MonoBehaviour
     public GameObject wall1;
     public GameObject wall2;
 	public bool allowStart;
+	public Text scoreText;
 
     private float nextActionTime = 0.0f;
 	private float nextSpeedIncreaseTime = 0.0f;
@@ -44,6 +45,9 @@ public class WaveTest : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		nextActionTime = Time.time;
+		nextSpeedIncreaseTime = Time.time;
+		score = 0;
 		allowStart = false;
         pos = player.transform.position;
         axis = player.transform.up;
@@ -75,6 +79,10 @@ public class WaveTest : MonoBehaviour
 		}
 
 		if (!gameOver & allowStart) {
+			
+			score++;
+			scoreText.text = score.ToString();
+
 			camera.transform.position = new Vector3 (player.transform.position.x + 2, 0, -10);
 
 			pos += player.transform.right * Time.deltaTime * speed;
@@ -147,7 +155,6 @@ public class WaveTest : MonoBehaviour
 
 	public void GameOver() {
 		allowStart = false;
-
 	} 
 
 	public void QuitGame() {
