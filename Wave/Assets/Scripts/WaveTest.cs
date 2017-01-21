@@ -44,6 +44,7 @@ public class WaveTest : MonoBehaviour
 	public bool allowStart;
 	public Text scoreText;
 	public Text panelScore;
+	public Text hiscore;
 	public int maxRange;
 
     private float nextActionTime = 0.0f;
@@ -54,6 +55,9 @@ public class WaveTest : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		hiscore.text = PlayerPrefs.GetFloat("hiscore").ToString();
+		//print(hisc);
+
 		score = 0;
 		allowStart = false;
         pos = player.transform.position;
@@ -196,6 +200,13 @@ public class WaveTest : MonoBehaviour
 		allowStart = false;
 		endPanel.SetActive (true);
 		panelScore.text = score.ToString();
+
+		float hiscore = PlayerPrefs.GetFloat("hiscore");
+		if (score>hiscore) {
+
+			PlayerPrefs.SetFloat("hiscore",score);
+		}
+
 	} 
 
 	public void QuitGame() {
