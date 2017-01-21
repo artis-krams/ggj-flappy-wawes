@@ -49,7 +49,7 @@ public class DestroyCollision : MonoBehaviour
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             startedPlay = true;
 
-            AudioSource.PlayClipAtPoint(sounds[Random.Range(0, sounds.Length - 1)], gameObject.transform.position);
+            AudioSource.PlayClipAtPoint(sounds[Random.Range(0, sounds.Length - 1)], gameObject.transform.position, 0.5f);
         }
 
 		//red ball
