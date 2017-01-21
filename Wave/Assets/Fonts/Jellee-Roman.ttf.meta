@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 9dec39172edd64aa09d35f9d509b2637
+timeCreated: 1485021694
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Jellee
+  fontNames:
+  - Jellee
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

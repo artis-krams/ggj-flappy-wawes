@@ -55,7 +55,7 @@ public class DestroyCollision : MonoBehaviour
 		//red ball
 
 		if (col.collider.name == "Player" && this.gameObject.tag=="pickupdecrease") {
-			manager.speed = manager.speed - 2;
+			manager.speed = manager.speed - 1.5f;
 
 		}
 

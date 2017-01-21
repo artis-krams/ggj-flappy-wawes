@@ -24,6 +24,10 @@ public class WaveTest : MonoBehaviour
     public float frequency;  // Speed of sine movement
     public float magnitude;   // Size of sine movement
     public float period;
+	public float tierOne;
+	public float tierTwo;
+	public float tierThree;
+	public float maxDistance;
     public int pickupcount;
 	public bool gameOver;
 	public int dostroyerStartOffset;
@@ -38,6 +42,7 @@ public class WaveTest : MonoBehaviour
     public GameObject wall2;
 	public bool allowStart;
 	public Text scoreText;
+	public int maxRange;
 
     private float nextActionTime = 0.0f;
 	private float nextSpeedIncreaseTime = 0.0f;
@@ -67,6 +72,22 @@ public class WaveTest : MonoBehaviour
 
 		if (destroyerSpeed > maxSpeed) {
 			destroyerSpeed = maxSpeed;
+		}
+
+		if (speed >= tierOne) {
+			maxRange = 3;
+		}
+
+		if (speed >= tierTwo) {
+			maxRange = 4;
+		}
+
+		if (speed >= tierThree) {
+			maxRange = 5;
+		}
+
+		if (player.transform.position.x - destroyer.transform.position.x <= maxDistance && destroyerSpeed < speed) {
+			destroyerSpeed = speed;
 		}
     }
 
@@ -98,7 +119,7 @@ public class WaveTest : MonoBehaviour
 			pos += player.transform.right * Time.deltaTime * speed;
 			player.transform.position = pos + axis * Mathf.Sin (Time.time * frequency) * currentwavestrenght;
 
-			spawner.transform.position = new Vector3 (player.transform.position.x + 25, spawner.transform.position.y, 0);
+			spawner.transform.position = new Vector3 (player.transform.position.x + 15, spawner.transform.position.y, 0);
 
 			destroyer.transform.position += destroyer.transform.right * Time.deltaTime * destroyerSpeed;
 
@@ -108,16 +129,22 @@ public class WaveTest : MonoBehaviour
 			if (Time.time > nextActionTime) {
 				nextActionTime += period;
 
-				int sw = Random.Range (0, 3);
+				int sw = Random.Range (0, maxRange);
 				switch (sw) {
 				case 0:
-					Instantiate (pickup1, new Vector3 (spawner.transform.position.x, Random.Range (8.0f, -8.0f), 0), Quaternion.identity);
+					Instantiate (pickup3, new Vector3 (spawner.transform.position.x, Random.Range (8.0f, -8.0f), 0), Quaternion.identity);
 					break;
 				case 1:
 					Instantiate (pickup2, new Vector3 (spawner.transform.position.x, Random.Range (8.0f, -8.0f), 0), Quaternion.identity);
 					break;
 				case 2:
-					Instantiate (pickup3, new Vector3 (spawner.transform.position.x, Random.Range (8.0f, -8.0f), 0), Quaternion.identity);
+					Instantiate (pickup1, new Vector3 (spawner.transform.position.x, Random.Range (8.0f, -8.0f), 0), Quaternion.identity);
+					break;
+				case 3:
+					Instantiate (pickup1, new Vector3 (spawner.transform.position.x, Random.Range (8.0f, -8.0f), 0), Quaternion.identity);
+					break;
+				case 4:
+					Instantiate (pickup1, new Vector3 (spawner.transform.position.x, Random.Range (8.0f, -8.0f), 0), Quaternion.identity);
 					break;
 				}
 
@@ -133,10 +160,10 @@ public class WaveTest : MonoBehaviour
 
 
 			if (Input.GetKey ("space") == true) {
-				currentwavestrenght = currentwavestrenght + waveincrease;
+				currentwavestrenght = currentwavestrenght + 2 * waveincrease;
 			} else {
 				if (currentwavestrenght > 0) {
-					currentwavestrenght = currentwavestrenght - (3 * waveincrease);
+					currentwavestrenght = currentwavestrenght - (4 * waveincrease);
 				} else {
 					currentwavestrenght = 0;
 				}
