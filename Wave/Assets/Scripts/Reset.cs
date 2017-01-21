@@ -13,9 +13,12 @@ public class Reset : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision) 
 	{
-		if (collision.collider.name=="wall"){
-//			this.gameObject.transform.position = new Vector3 (transform.position.x, 0, 0);
-			wtest.currentwavestrenght = 0;
+		if (collision.collider.name=="wall") {
+			wtest.SlowDown ();
+		};
+
+		if (collision.collider.name=="Destroyer") {
+			wtest.gameOver = true;
 		};
 	}
 
