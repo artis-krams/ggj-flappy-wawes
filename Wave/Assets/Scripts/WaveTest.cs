@@ -46,12 +46,14 @@ public class WaveTest : MonoBehaviour
 	public Text panelScore;
 	public Text hiscore;
 	public int maxRange;
+    public float minWaveStrength = 0.5f;
 
     private float nextActionTime = 0.0f;
 	private float nextSpeedIncreaseTime = 0.0f;
     private int spaceDown = 0;
     private Vector3 axis;
     private Vector3 pos;
+
     // Use this for initialization
     void Start()
     {
@@ -159,16 +161,14 @@ public class WaveTest : MonoBehaviour
 				destroyerSpeed += destroyerSpeedIncrease;
 				AudioSource.PlayClipAtPoint (speedUpSound, player.transform.position);
 			}
-
-
-
+            
 			if (Input.GetKey ("space") == true) {
 				currentwavestrenght = currentwavestrenght + 2 * waveincrease;
 			} else {
-				if (currentwavestrenght > 0) {
+				if (currentwavestrenght > minWaveStrength) {
 					currentwavestrenght = currentwavestrenght - (4 * waveincrease);
 				} else {
-					currentwavestrenght = 0;
+					currentwavestrenght = minWaveStrength;
 				}
 			}
 		}
