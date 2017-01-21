@@ -163,7 +163,6 @@ public class WaveTest : MonoBehaviour
 			}
             
 			if (Input.GetKey ("space") == true) {
-				destroyerSpeed -= destroyerSpeedIncrease/10;
 				currentwavestrenght = currentwavestrenght + 2 * waveincrease;
 			} else {
 				destroyerSpeed += destroyerSpeedIncrease/100;
