@@ -11,6 +11,8 @@ public class WaveTest : MonoBehaviour
 	public AudioClip slowDownSound;
 	public AudioClip speedUpSound;
     public float speed;
+	public float maxSpeed;
+	public float minSpeed;
 	public float destroyerSpeed;
 	public float speedIncrease;
 	public float speedDecrease;
@@ -45,8 +47,6 @@ public class WaveTest : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		nextActionTime = Time.time;
-		nextSpeedIncreaseTime = Time.time;
 		score = 0;
 		allowStart = false;
         pos = player.transform.position;
@@ -57,7 +57,17 @@ public class WaveTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (speed < minSpeed) {
+			speed = minSpeed;
+		}
 
+		if (speed > maxSpeed) {
+			speed = maxSpeed;
+		}
+
+		if (destroyerSpeed > maxSpeed) {
+			destroyerSpeed = maxSpeed;
+		}
     }
 
     void FixedUpdate()
@@ -143,6 +153,8 @@ public class WaveTest : MonoBehaviour
 
 
 	public void FirstStart() {
+		nextActionTime = Time.time;
+		nextSpeedIncreaseTime = Time.time;
 		allowStart = true;
 	}
 

@@ -39,10 +39,10 @@ public class DestroyCollision : MonoBehaviour
     {
         if (col.collider.name == "Player")
         {
-			print (manager.speed);
-			print (manager.score);
+		//	print (manager.speed);
+		//	print (manager.score);
 
-			manager.score += Mathf.Round(manager.speed*2);
+			//manager.score += Mathf.Round(manager.speed*2);
 
 
             particles.Play();
@@ -51,6 +51,25 @@ public class DestroyCollision : MonoBehaviour
 
             AudioSource.PlayClipAtPoint(sounds[Random.Range(0, sounds.Length - 1)], gameObject.transform.position);
         }
+
+		//red ball
+
+		if (col.collider.name == "Player" && this.gameObject.tag=="pickupdecrease") {
+			manager.speed = manager.speed - 2;
+
+		}
+
+		if (col.collider.name == "Player" && this.gameObject.tag=="pickupincrease") {
+			manager.speed = manager.speed + 1;
+
+		}
+
+		if (col.collider.name == "Player" && this.gameObject.tag=="pickup") {
+			manager.score += Mathf.Round(manager.speed*2);
+
+		}
+
+
 
         if (col.gameObject.name == "Destroyer")
         {
