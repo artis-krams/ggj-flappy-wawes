@@ -5,6 +5,7 @@ using UnityEngine;
 public class DestroyCollision : MonoBehaviour
 {
     private ParticleSystem particles;
+    private bool startedPlay;
 
     // Use this for initialization
     void Start()
@@ -16,18 +17,25 @@ public class DestroyCollision : MonoBehaviour
     void FixedUpdate()
     {
         gameObject.transform.Rotate(Vector3.up * Time.deltaTime, 1);
+        if (particles)
+        {
+            if (!particles.IsAlive() && startedPlay)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
     void OnCollisionEnter(Collision col)
     {
-		if (col.collider.name == "Player")
+        if (col.collider.name == "Player")
         {
             particles.Play();
-//            Destroy(gameObject);
+            startedPlay = true;
         }
 
-		if (col.gameObject.name == "Destroyer")
-		{
-			Destroy(gameObject);
-		}
+        if (col.gameObject.name == "Destroyer")
+        {
+            Destroy(gameObject);
+        }
     }
 }
