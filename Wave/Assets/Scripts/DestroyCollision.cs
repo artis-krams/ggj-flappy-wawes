@@ -55,18 +55,21 @@ public class DestroyCollision : MonoBehaviour
 		//red ball
 
 		if (col.collider.name == "Player" && this.gameObject.tag=="pickupdecrease") {
-			manager.speed = manager.speed - 1.5f;
+			manager.speed = manager.speed - 0.7f;
 
 		}
 
 		if (col.collider.name == "Player" && this.gameObject.tag=="pickupincrease") {
 			manager.speed = manager.speed + 1;
+			manager.destroyerSpeed -= 0.5f;
+			manager.score += Mathf.Round(manager.speed*3);
 
 		}
 
 		if (col.collider.name == "Player" && this.gameObject.tag=="pickup") {
 			manager.score += Mathf.Round(manager.speed*2);
-
+			manager.speed = manager.speed + 0.5f;
+			manager.destroyerSpeed -= 0.25f;
 		}
 
 
