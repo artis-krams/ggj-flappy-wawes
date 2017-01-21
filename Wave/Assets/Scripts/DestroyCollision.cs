@@ -9,7 +9,7 @@ public class DestroyCollision : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        particles = this.gameObject.GetComponent<GameObject>().GetComponentInChildren<ParticleSystem>();
+        particles = gameObject.GetComponentInChildren<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -19,11 +19,15 @@ public class DestroyCollision : MonoBehaviour
     }
     void OnCollisionEnter(Collision col)
     {
-        print(particles);
-        if (col.gameObject.name == "Player")
+		if (col.collider.name == "Player")
         {
             particles.Play();
-            Destroy(gameObject, 2);
+//            Destroy(gameObject);
         }
+
+		if (col.gameObject.name == "Destroyer")
+		{
+			Destroy(gameObject);
+		}
     }
 }
