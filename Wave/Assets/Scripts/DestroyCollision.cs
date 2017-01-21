@@ -6,18 +6,20 @@ public class DestroyCollision : MonoBehaviour
 {
     private ParticleSystem particles;
     private bool startedPlay;
-	public AudioClip[] sounds;
+    public AudioClip[] sounds;
+    public float minRotation = 0.1f;
+    public float maxRotation = 1;
 
-    // Use this for initialization
     void Start()
     {
         particles = gameObject.GetComponentInChildren<ParticleSystem>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        gameObject.transform.Rotate(Vector3.up * Time.deltaTime, 1);
+        gameObject.transform.Rotate(Vector3.up * Time.deltaTime, Random.Range(minRotation, maxRotation));
+        gameObject.transform.Rotate(Vector3.right * Time.deltaTime, Random.Range(minRotation, maxRotation));
+        //gameObject.transform.Rotate(Vector3.forward * Time.deltaTime, Random.Range(minRotation, maxRotation));
         if (particles)
         {
             if (!particles.IsAlive() && startedPlay)
@@ -26,15 +28,16 @@ public class DestroyCollision : MonoBehaviour
             }
         }
     }
+
     void OnCollisionEnter(Collision col)
     {
         if (col.collider.name == "Player")
         {
             particles.Play();
-			gameObject.GetComponent<MeshRenderer> ().enabled = false;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
             startedPlay = true;
 
-			AudioSource.PlayClipAtPoint (sounds [Random.Range(0, sounds.Length - 1)], gameObject.transform.position);
+            AudioSource.PlayClipAtPoint(sounds[Random.Range(0, sounds.Length - 1)], gameObject.transform.position);
         }
 
         if (col.gameObject.name == "Destroyer")
