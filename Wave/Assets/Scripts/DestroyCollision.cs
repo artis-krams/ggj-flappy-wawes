@@ -6,6 +6,7 @@ public class DestroyCollision : MonoBehaviour
 {
     private ParticleSystem particles;
     private bool startedPlay;
+	public AudioClip[] sounds;
 
     // Use this for initialization
     void Start()
@@ -32,6 +33,8 @@ public class DestroyCollision : MonoBehaviour
             particles.Play();
 			gameObject.GetComponent<MeshRenderer> ().enabled = false;
             startedPlay = true;
+
+			AudioSource.PlayClipAtPoint (sounds [Random.Range(0, sounds.Length - 1)], gameObject.transform.position);
         }
 
         if (col.gameObject.name == "Destroyer")
