@@ -42,13 +42,13 @@ public class WaveTest : MonoBehaviour {
 
 	void FixedUpdate() {
 
-		camera.transform.position = new Vector3 (player.transform.position.x, 0, -10);
+		camera.transform.position = new Vector3 (player.transform.position.x + 2, 0, -10);
 		//camera.transform.position.y = player.transform.position.y;
 
 		pos += player.transform.transform.right * Time.deltaTime * speed;
 //		player.transform.Translate (new Vector3 (speed, 0, 0));
 		player.transform.position = pos + axis * Mathf.Sin (Time.time * frequency) * currentwavestrenght;
-		spawner.transform.position = new Vector3 (player.transform.position.x + 10, spawner.transform.position.y, 0);
+		spawner.transform.position = new Vector3 (player.transform.position.x + 25, spawner.transform.position.y, 0);
 		destroyer.transform.position = new Vector3 (player.transform.position.x - 10, destroyer.transform.position.y, 0);
 		wall1.transform.position = new Vector3 (player.transform.position.x, wall1.transform.position.y, 0);
 		wall2.transform.position = new Vector3 (player.transform.position.x, wall2.transform.position.y, 0);
@@ -87,7 +87,7 @@ public class WaveTest : MonoBehaviour {
 
 		if (spaceDown == 0) {
 			if (currentwavestrenght > 0) {
-				currentwavestrenght = currentwavestrenght - (2* waveincrease);
+				currentwavestrenght = currentwavestrenght - (3 * waveincrease);
 			} else {
 				currentwavestrenght = 0;
 			}

@@ -30,6 +30,7 @@ public class DestroyCollision : MonoBehaviour
         if (col.collider.name == "Player")
         {
             particles.Play();
+			gameObject.GetComponent<MeshRenderer> ().enabled = false;
             startedPlay = true;
         }
 
