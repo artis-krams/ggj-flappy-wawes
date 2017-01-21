@@ -32,6 +32,7 @@ public class WaveTest : MonoBehaviour
 	public bool gameOver;
 	public int dostroyerStartOffset;
     private int i;
+	public GameObject endPanel;
     public GameObject pickup1;
     public GameObject pickup2;
     public GameObject pickup3;
@@ -42,6 +43,7 @@ public class WaveTest : MonoBehaviour
     public GameObject wall2;
 	public bool allowStart;
 	public Text scoreText;
+	public Text panelScore;
 	public int maxRange;
 
     private float nextActionTime = 0.0f;
@@ -89,25 +91,22 @@ public class WaveTest : MonoBehaviour
 		if (player.transform.position.x - destroyer.transform.position.x <= maxDistance && destroyerSpeed < speed) {
 			destroyerSpeed = speed;
 		}
-    }
 
-    void FixedUpdate()
-	{  	
-	
 		if (Input.GetKey ("space")==true & allowStart==false) {
-			print ("First start");
+			//print ("First start");
 			FirstStart ();
 		}
 
 		if (gameOver & allowStart) {
-			if (Input.GetKey ("space")==true) {
-				print ("restart");
+			if (Input.GetKeyDown("space")==true) {
+				//print ("restart");
 				RestartGame ();
 			}
-
-
-
 		}
+    }
+
+    void FixedUpdate()
+	{  	
 
 		if (!gameOver & allowStart) {
 			
@@ -193,7 +192,10 @@ public class WaveTest : MonoBehaviour
 	}
 
 	public void GameOver() {
+		gameOver = true;
 		allowStart = false;
+		endPanel.SetActive (true);
+		panelScore.text = score.ToString();
 	} 
 
 	public void QuitGame() {

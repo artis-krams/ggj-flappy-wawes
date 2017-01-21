@@ -18,7 +18,7 @@ public class Reset : MonoBehaviour {
 		};
 
 		if (collision.collider.name=="Destroyer") {
-			wtest.gameOver = true;
+			wtest.GameOver ();
 		};
 	}
 
