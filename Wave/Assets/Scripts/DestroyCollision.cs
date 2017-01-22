@@ -47,6 +47,7 @@ public class DestroyCollision : MonoBehaviour
 
             particles.Play();
             gameObject.GetComponent<MeshRenderer>().enabled = false;
+			Destroy (gameObject.transform.GetChild(0).gameObject);
             startedPlay = true;
 
             AudioSource.PlayClipAtPoint(sounds[Random.Range(0, sounds.Length - 1)], gameObject.transform.position, 0.5f);

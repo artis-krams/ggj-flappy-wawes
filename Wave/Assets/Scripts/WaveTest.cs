@@ -10,6 +10,7 @@ public class WaveTest : MonoBehaviour
     public GameObject player;
 	public AudioClip slowDownSound;
 	public AudioClip speedUpSound;
+	public AudioClip gameOverSound;
     public float speed;
 	public float maxSpeed;
 	public float minSpeed;
@@ -53,10 +54,13 @@ public class WaveTest : MonoBehaviour
     private int spaceDown = 0;
     private Vector3 axis;
     private Vector3 pos;
+	private TrailRenderer trail;
 
     // Use this for initialization
     void Start()
     {
+		trail = player.GetComponent<TrailRenderer> ();
+		trail.widthMultiplier = 2f;
 		hiscore.text = PlayerPrefs.GetFloat("hiscore").ToString();
 		//print(hisc);
 
@@ -83,14 +87,17 @@ public class WaveTest : MonoBehaviour
 		}
 
 		if (speed >= tierOne) {
+			trail.widthMultiplier = 1.5f;
 			maxRange = 3;
 		}
 
 		if (speed >= tierTwo) {
+			trail.widthMultiplier = 1f;
 			maxRange = 4;
 		}
 
 		if (speed >= tierThree) {
+			trail.widthMultiplier = 0.5f;
 			maxRange = 5;
 		}
 
@@ -197,6 +204,7 @@ public class WaveTest : MonoBehaviour
 	}
 
 	public void GameOver() {
+		AudioSource.PlayClipAtPoint (gameOverSound, player.transform.position);
 		gameOver = true;
 		allowStart = false;
 		endPanel.SetActive (true);
